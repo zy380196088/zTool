@@ -1,0 +1,36 @@
+{
+  "name": "ztool",
+  "version": "1.0.0",
+  "description": "js components",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zy380196088/zTool.git"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": "Zoey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zy380196088/zTool/issues"
+  },
+  "homepage": "https://github.com/zy380196088/zTool#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-less": "^3.3.2",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-uglify": "^3.0.0",
+    "jQuery": "^1.7.4"
+  }
+}
