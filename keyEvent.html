@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+      <title>fireKeyEvent</title>
+    </head>
+
+    <body>
+        <input type="text" id="txt1"/>
+        <input type="button" id="btn1" value="fire"/>
+
+        <script type="text/javascript">
+            function $(id){
+                return document.getElementById(id);
+            }
+
+            function addEvent(el, type, fn){
+                if(document.addEventListener){
+                    el.addEventListener(type, fn, true);
+                }else if(document.attachEvent){
+                    el.attachEvent("on"+type, fn);
+                }else{
+                    el["on"+type] = fn;
+                }
+            }
+
+
+            function fireKeyEvent(el, evtType, keyCode){
+                var evtObj;
+
+                if(document.createEvent){
+                    if( window.KeyEvent ) {
+                        evtObj = document.createEvent('KeyEvents');
+                        evtObj.initKeyEvent( evtType, true, true, window, false, false, false, false, keyCode, 0 );
+                    } else {
+                        evtObj = document.createEvent('UIEvents');
+                        evtObj.initUIEvent( evtType, true, true, window, 1 );
+                        delete evtObj.keyCode;
+
+                        if(typeof evtObj.keyCode === "undefined"){
+                            Object.defineProperty(evtObj,"keyCode",{value:keyCode});
+                        }else{
+                            evtObj.key=String.fromCharCode(keyCode);
+                        }
+                    }
+
+                    el.dispatchEvent(evtObj);
+
+                }else if(document.createEventObject){
+                    evtObj = document.createEventObject();
+                    evtObj.keyCode=keyCode
+                    el.fireEvent('on'+evtType, evtObj);
+               }
+            }
+
+            addEvent($("txt1"), "keydown" ,function(e){
+                var evt=window.event || e;
+                var keyCode=evt.keyCode || evt.key.charCodeAt(0);
+                alert("keyCode:"+keyCode);
+            })
+
+
+                fireKeyEvent($("txt1"), "keydown", 27);
+
+        </script>
+    </body>
+</html>

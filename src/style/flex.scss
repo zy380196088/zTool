@@ -1,0 +1,65 @@
+@charset "UTF-8";
+.f_container {
+  display: flex;
+  flex-direction: row; //决定主轴方向;flex-direction: row | row-reverse | column | column-reverse;
+  flex-wrap: nowrap; //决定容器内项目是否可换;flex-wrap: nowrap | wrap | wrap-reverse;
+  justify-content: center; //定义了项目在主轴的对齐方式。    justify-content: flex-start | flex-end | center | space-between | space-around;
+  align-items: center; // 定义了项目在交叉轴上的对齐方式. align-items: flex-start | flex-end | center | baseline | stretch;
+  align-content: center; //定义了多根轴线的对齐方式，如果项目只有一根轴线，那么该属性将不起作用;    align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+}
+
+%direction_row {
+  flex-direction: row; //主轴为水平方向,起点左端
+}
+
+%direction_row_r {
+  flex-direction: row-reverse; //主轴为水平方向,起点右端
+}
+
+%direction_col_r {
+  flex-direction: column; //column：主轴为垂直方向，起点在上沿
+}
+
+%direction_col_r {
+  flex-direction: column-reverse; //column：主轴为垂直方向，起点在下沿
+}
+
+.f_direction_row {
+  @extend %direction_row;
+}
+
+.f_nowrap {
+  flex-wrap: nowrap; //不换行，即当主轴尺寸固定时，当空间不足时，项目尺寸会随之调整而并不会挤到下一行。
+}
+
+.f_wrap {
+  flex-wrap: wrap; //目主轴总尺寸超出容器时换行，第一行在上方
+}
+
+.f_wrap_r {
+  flex-wrap: wrap-reverse; //目主轴总尺寸超出容器时换行，第一行在下方
+}
+
+.f_justify_content_start {
+  justify-content: flex-start; //左对齐
+}
+
+.f_justify_content_end {
+  justify-content: flex-end; //左对齐
+}
+
+.f_justify_content_center {
+  justify-content: center; // 居中
+}
+
+.f_justify_content_between {
+  justify-content: space-between; //两端对齐，项目之间的间隔相等，即剩余空间等分成间隙.
+}
+
+.f_justify_content_around {
+  justify-content: space-around; //每个项目两侧的间隔相等，所以项目之间的间隔比项目与边缘的间隔大一倍。
+}
+
+.f_align_content {
+
+}
