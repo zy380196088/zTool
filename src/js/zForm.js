@@ -14,34 +14,41 @@ var Form = {
     readOnly: false, //是否只读
     name: '',
     type: ['text', 'number', 'checkbox', 'radio'], //类型
-    value: , //值
+    value: "",//值
     events: [{
-      blur: ,
-      change: ,
-      focus: ,
+      blur: "",
+      change: "",
+      focus: "",
     }], //事件
   }]
-}
+};
 
 
-
-var Validator = function(argument) {
+//定义验证方法,添加验证规则
+var Validator = function (argument) {
   //将验证方法绑定到 Validator 上
-}
+};
 
-
-;
-(function($, window, document, undefined) {
-  $.fn.Validator = function(option) {
+(function ($, window, document, undefined) {
+  Validator.prototype = {};
+  $.fn.Validator = function (option) {
     var $self = this;
     this.default = {}; //默认配置
-    this.message = {
-
-    }
+    this.messages = {
+      required: "必填",
+      remote: "请填写符合要求的字段",
+      email: "电子邮件格式不正确",
+      url: "网址格式不正确",
+      date: "日期格式不正确",
+      number: "请输入数字",
+      digits: "只能输入整数",
+      creditCard: "请输入正确的信用卡号",
+      equalTo: "请输入相同的值",
+    };
     this.options = $.extend({}, this.default, option); //扩展自定义配置
-  }
+  };
 
-  $.fn.Form = function(options) {
+  $.fn.Form = function (options) {
 
   }
 })(jQuery, window, document);
