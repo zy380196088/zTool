@@ -2,7 +2,7 @@
  * @Author: Joy
  * @Date:   2017-11-16 09:39:19
  * @Last Modified by:   Joy
- * @Last Modified time: 2017-11-16 16:42:15
+ * @Last Modified time: 2017-11-16 16:49:12
  * @Description: 点击增加按钮添加 input
  */
 ;
@@ -111,6 +111,7 @@
     var _groupInputs = new GroupInputs(this, options);
     //暴露公有方法
     _groupInputs.getInputsValue = function() {
+      var inputName = this.settings.input.name;
       var inputArr = this.$element.find("input");
       var valueArr = [];
       inputArr.each(function() {
@@ -119,8 +120,13 @@
           }
         })
         // console.log(inputArr, valueArr)
-      return valueArr;
+      var result = {
+        "name": inputName,
+        "value": valueArr,
+      }
+      return result;
     }
+
     return _groupInputs.init(this, options);
   }
 })(jQuery, window, document);
