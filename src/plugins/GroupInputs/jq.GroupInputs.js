@@ -2,7 +2,7 @@
  * @Author: Joy
  * @Date:   2017-11-16 09:39:19
  * @Last Modified by:   Joy
- * @Last Modified time: 2017-11-16 16:22:00
+ * @Last Modified time: 2017-11-16 16:42:15
  * @Description: 点击增加按钮添加 input
  */
 ;
@@ -18,7 +18,8 @@
       input: {
         class: "input", //input 样式
         type: "text", //input 的 type 类型,默认 text
-        name: "" //input的 name 属性
+        name: "", //input的 name 属性
+        placeholder: "",
       },
       btn: {
         plus: {
@@ -44,8 +45,8 @@
     //合并配置
     self.settings = $.extend({}, self.defaults, opt); //有效配置
     // self.input = $("<input>").addClass(self.settings.inputClassName);
-    self.plusInputTpl = `<p><input type="${self.settings.input.type}" name="${self.settings.input.name}" class="${self.settings.input.class}"/><span data-btn-type='plusInputBtn' class="${self.settings.btn.plus.class}">${self.settings.btn.plus.text}</span></p>`;
-    self.minusInputTpl = `<p><input type="${self.settings.input.type}" name="${self.settings.input.name}" class="${self.settings.input.class}"/><span data-btn-type='minusInputBtn' class="${self.settings.btn.minus.class}">${self.settings.btn.minus.text}</span></p>`;
+    self.plusInputTpl = `<p><input type="${self.settings.input.type}" name="${self.settings.input.name}" placeholder="${self.settings.input.placeholder}" class="${self.settings.input.class}"/><span data-btn-type='plusInputBtn' class="${self.settings.btn.plus.class}">${self.settings.btn.plus.text}</span></p>`;
+    // self.minusInputTpl = `<p><input type="${self.settings.input.type}" name="${self.settings.input.name}" class="${self.settings.input.class}"/><span data-btn-type='minusInputBtn' class="${self.settings.btn.minus.class}">${self.settings.btn.minus.text}</span></p>`;
   };
   //定义Plugin的方法(私有)
   GroupInputs.prototype = {
