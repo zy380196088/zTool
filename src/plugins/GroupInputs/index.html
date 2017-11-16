@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>input 组</title>
+  <link rel="stylesheet" type="text/css" href="../../style/ui.css">
+  <style type="text/css" media="screen">
+  body{
+    padding: 10px;
+  }
+  p{
+    height: 50px;
+  }
+  .br{
+    border-radius:4px;
+  }
+  .bb{
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+  }
+  .input{
+    box-sizing: border-box ;
+    line-height: 24px;
+    margin: 0 10px;
+    outline: none;
+    padding: 2px 5px;
+  }
+  .input:focus{
+    border: 2px solid rgb(95, 189, 171);
+  }
+
+  .btn{
+    display: inline-block;
+    width: auto;
+    min-width: 30px;
+    line-height: 24px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 2px 10px;
+  }
+  .plusBtn{
+    color:  rgb(95, 189, 171);
+    border-color: rgb(95, 189, 171);
+  }
+  .plusBtn:after{
+    content: '+';
+  }
+  .minusBtn{
+    color: red;
+    border-color:red;
+  }
+  .minusBtn:after{
+    content: '-';
+  }
+
+
+  </style>
+</head>
+<body>
+<div id="GroupInputsDmeo"></div>
+
+<script type="text/javascript" src="../../lib/jquery-3.1.0.js"></script>
+<script type="text/javascript" src="jq.GroupInputs.js"></script>
+<script type="text/javascript">
+  var urlInputs = $('#GroupInputsDmeo').groupInputs({
+    input: {
+        class: "input bb br", //input 样式
+        type: "text", //input 的 type 类型,默认 text
+        name: "" //input的 name 属性
+      },
+      btn: {
+        plus: {
+          text: '', //添加按钮文字
+          class: 'bb br btn btn-color plusBtn ' //添加按钮样式
+        },
+        minus: {
+          text: '', //删除按钮文字
+          class: 'bb br btn btn-color minusBtn ' //删除按钮样式
+        }
+      },
+      min: 1, //input最小个数
+      minError: function(minNumber) {
+        alert("最少"+minNumber+"个输入框")
+      },
+      max:5,
+      maxError: function(maxNumber) {
+        alert("最多只支持"+maxNumber+"个输入框")
+      },
+  });
+  var Urls = urlInputs.getInputsValue();
+  console.log(Urls)
+</script>
+</body>
+</html>
