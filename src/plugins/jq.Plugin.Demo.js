@@ -2,7 +2,7 @@
  * @Author: Zoey
  * @Date: 2017/11/14 09:28
  * @Last Modified by:   Joy
- * @Last Modified time: 2017-11-16 10:45:31
+ * @Last Modified time: 2017-11-17 09:33:26
  * @Description:
  */
 ;
@@ -17,17 +17,24 @@
     self.defaults = {};
     //合并配置
     self.settings = $.extend({}, self.defaults, opt);
-
+    self.tpl = '';
   };
   //定义Plugin的方法
   Plugin.prototype = {
     init: function() {
-      return this.$element;
+      return this;
+    },
+    render: function() {
+      this.$element.append(this.tpl)
+    },
+    bindEvent: function() {
+      var self = this;
     }
   };
 
   $.fn.Plugin = function(options) {
-    var PluginObj = new Plugin(this, options);
-    return PluginObj.init();
+    var _PluginObj = new Plugin(this, options);
+    _PluginObj.publicFn = function() {}; //暴露公共方法
+    return _PluginObj.init(this, options);
   }
 })(jQuery, window, document);
