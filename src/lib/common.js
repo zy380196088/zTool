@@ -2,234 +2,6 @@
  * Created by zhouyu on 2017/7/31.
  */
 
-//根据角色渲染菜单
-function initMenu(userId) {
-
-  // userId:0 => 网评员 Menu,
-  // userId:1 => 区县管理 Menu
-  // userId:2 => 市级管理 Menu
-  var url = window.location.href;
-  var MenuData = [{
-    menuList: [{
-      num: 1,
-      text: '首页',
-      show: true,
-      on: false,
-      url: '/wpy/index.html'
-    }, {
-      num: 2,
-      text: '任务管理',
-      show: true,
-      on: false,
-      url: '/wpy/task/index.html'
-    }, {
-      num: 3,
-      text: '组织管理',
-      show: false,
-      on: false,
-      url: '/wpy/organization/index.html'
-    }, {
-      num: 4,
-      text: '舆情监控',
-      show: true,
-      on: false,
-      url: '/wpy/monitor/index.html'
-    }, {
-      num: 5,
-      text: '数据中心',
-      show: false,
-      on: false,
-      url: '/wpy/dataCenter/selfIndex.html'
-    }, {
-      num: 6,
-      text: '知识库',
-      show: true,
-      on: false,
-      url: '/wpy/knowledgeBase/publicIndex.html'
-    }, {
-      num: 7,
-      text: '系统管理',
-      show: false,
-      on: false,
-      url: '/wpy/system/index.html'
-    }, {
-      num: 8,
-      text: '媒体服务',
-      show: false,
-      on: false,
-      url: '/wpy/mediaServices/Index.html'
-    }],
-  },
-    {
-      menuList: [{
-        num: 1,
-        text: '首页',
-        show: true,
-        on: false,
-        url: '/county/index.html'
-      }, {
-        num: 2,
-        text: '任务管理',
-        show: true,
-        on: false,
-        url: '/county/task/index.html'
-      }, {
-        num: 3,
-        text: '组织管理',
-        show: true,
-        on: false,
-        url: '/county/organization/index.html'
-      }, {
-        num: 4,
-        text: '舆情监控',
-        show: true,
-        on: false,
-        url: '/county/monitor/index.html'
-      }, {
-        num: 5,
-        text: '数据中心',
-        show: true,
-        on: false,
-        url: '/county/dataCenter/selfIndex.html'
-      }, {
-        num: 6,
-        text: '知识库',
-        show: true,
-        on: false,
-        url: '/county/knowledgeBase/publicIndex.html'
-      }, {
-        num: 7,
-        text: '系统管理',
-        show: false,
-        on: false,
-        url: '/county/system/index.html'
-      }, {
-        num: 8,
-        text: '媒体服务',
-        show: true,
-        on: false,
-        url: '/county/mediaServices/Index.html'
-      }],
-    },
-    {
-      menuList: [{
-        num: 1,
-        text: '首页',
-        show: true,
-        on: false,
-        url: '/municipal/index.html'
-      }, {
-        num: 2,
-        text: '任务管理',
-        show: true,
-        on: false,
-        url: '/municipal/task/index.html'
-      }, {
-        num: 3,
-        text: '组织管理',
-        show: true,
-        on: false,
-        url: '/municipal/organization/index.html'
-      }, {
-        num: 4,
-        text: '舆情监控',
-        show: true,
-        on: false,
-        url: '/municipal/monitor/index.html'
-      }, {
-        num: 5,
-        text: '数据中心',
-        show: true,
-        on: false,
-        url: '/municipal/dataCenter/publicIndex.html'
-      }, {
-        num: 6,
-        text: '知识库',
-        show: true,
-        on: false,
-        url: '/municipal/knowledgeBase/publicIndex.html'
-      }, {
-        num: 7,
-        text: '系统管理',
-        show: false,
-        on: false,
-        url: '/municipal/system/index.html'
-      }, {
-        num: 8,
-        text: '媒体服务',
-        show: true,
-        on: false,
-        url: '/municipal/mediaServices/Index.html'
-      }],
-    }
-  ];
-
-  if (getIndexOf(url, 'task') == true) {
-    changeMenuStatus(1, MenuData)
-  }
-
-  if (getIndexOf(url, 'organization') == true) {
-    changeMenuStatus(2, MenuData)
-  }
-
-  if (getIndexOf(url, 'monitor') == true) {
-    changeMenuStatus(3, MenuData)
-  }
-
-  if (getIndexOf(url, 'dataCenter') == true) {
-    changeMenuStatus(4, MenuData)
-  }
-
-  if (getIndexOf(url, 'knowledgeBase') == true) {
-    changeMenuStatus(5, MenuData)
-  }
-  if (getIndexOf(url, 'system') == true) {
-    changeMenuStatus(6, MenuData)
-  }
-  if (getIndexOf(url, 'mediaServices') == true) {
-    changeMenuStatus(7, MenuData)
-  }
-  if ((getIndexOf(url, 'task') || getIndexOf(url, 'organization') || getIndexOf(url, 'dataCenter') || getIndexOf(url, 'knowledgeBase') || getIndexOf(url, 'system') || getIndexOf(url, 'monitor') || getIndexOf(url, 'mediaServices') || getIndexOf(url, 'user_center')) !== true) {
-    changeMenuStatus(0, MenuData)
-  }
-
-  switch (userId) {
-    case 0:
-    {
-      renderHtml(MenuData[0], 'topMenu-tpl', 'topMenu-dom');
-      break;
-    }
-    case 1:
-    {
-      renderHtml(MenuData[1], 'topMenu-tpl', 'topMenu-dom');
-      break;
-    }
-    case 2:
-    {
-      renderHtml(MenuData[2], 'topMenu-tpl', 'topMenu-dom');
-      break;
-    }
-    default:
-      break;
-  }
-  //查找字符串中的字符串
-  function getIndexOf(Str, searchStr) {
-    //console.log("urlStr", Str);
-    var index = Str.indexOf(searchStr);
-    if (index == -1) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  function changeMenuStatus(index, menuDataArr) {
-    //index 改变 MENU 的索引;
-    for (var i = 0; i < menuDataArr.length; i++) {
-      menuDataArr[i].menuList[index].on = true;
-    }
-  }
-}
 
 //juicer模板渲染
 function renderHtml(data, jsId, domId) {
@@ -242,7 +14,7 @@ function renderHtml(data, jsId, domId) {
 
 var wpyTools = {
   //xxxx秒 => 输出'a天b小时c分钟'
-  secondTimeToDay: function (t) {
+  secondTimeToDay: function(t) {
     var d = 0,
       h = 0,
       m = 0,
@@ -255,14 +27,14 @@ var wpyTools = {
     }
     return d + "天 " + h + "小时 " + m + " 分钟";
   },
-  isNull: function (data) {
+  isNull: function(data) {
     if (data == null) {
       return "0"
     } else {
       return data;
     }
   },
-  urlAddHttp: function (url) {
+  urlAddHttp: function(url) {
     if (typeof url == 'string') {
       url = url.substr(0, 7).toLowerCase() == "http://" ? url : "http://" + url;
       return url;
@@ -270,7 +42,7 @@ var wpyTools = {
       return "";
     }
   },
-  unique: function (arr) {
+  unique: function(arr) {
     var res = [];
     var json = {};
     for (var i = 0; i < arr.length; i++) {
@@ -281,13 +53,13 @@ var wpyTools = {
     }
     return res;
   },
-  numberToPercentStr: function (number, decimal) {
+  numberToPercentStr: function(number, decimal) {
     //number转换数,decimal小数点后保留几位,默认为2
     var decimal = parseInt(decimal) || 2;
     return parseFloat(number * 0.01).toFixed(decimal) + '%';
     console.log(parseFloat(number * 0.01).toFixed(decimal), '%')
   },
-  parseQueryString: function (url) {
+  parseQueryString: function(url) {
     //把url的参数部分转化成json对象
     var reg_url = /^[^\?]+\?([\w\W]+)$/,
       reg_para = /([^&=]+)=([\w\W]*?)(&|$|#)/g,
@@ -302,26 +74,26 @@ var wpyTools = {
     }
     return ret;
   },
-  getQueryString: function (name) {
+  getQueryString: function(name) {
     // 通过key获取url中的参数值
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var r = window.location.search.substr(1).match(reg);
     if (r != null) return unescape(r[2]);
     return null;
   },
-  parseParam: function (param, key) {
+  parseParam: function(param, key) {
     var paramStr = "";
     if (param instanceof String || param instanceof Number || param instanceof Boolean) {
       paramStr += "&" + key + "=" + encodeURIComponent(param);
     } else {
-      $.each(param, function (i) {
+      $.each(param, function(i) {
         var k = key == null ? i : key + (param instanceof Array ? "[" + i + "]" : "." + i);
         paramStr += '&' + wpyTools.parseParam(this, k);
       });
     }
     return paramStr.substr(1);
   },
-  goParamPage: function (param, pageUrl) {
+  goParamPage: function(param, pageUrl) {
     //pageUrl 为相对于根目录的页面地址
     if (!!param && !!pageUrl) {
       var urlStr = pageUrl + '?' + wpyTools.parseParam(param);
@@ -332,7 +104,7 @@ var wpyTools = {
     }
 
   },
-  md5: function (string) {
+  md5: function(string) {
     function md5_RotateLeft(lValue, iShiftBits) {
       return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
     }
@@ -547,10 +319,10 @@ var wpyTools = {
     }
     return (md5_WordToHex(a) + md5_WordToHex(b) + md5_WordToHex(c) + md5_WordToHex(d)).toLowerCase();
   },
-  getFormJson: function (domId) {
+  getFormJson: function(domId) {
     var json = {};
     var $dom = $("#" + domId).serializeArray();
-    $.each($dom, function () {
+    $.each($dom, function() {
       if (json[this.name] !== undefined) {
         if (!json[this.name].push) {
           json[this.name] = [json[this.name]];
@@ -560,13 +332,13 @@ var wpyTools = {
     });
     return json;
   },
-  refreshPage: function () {
+  refreshPage: function() {
     location.reload();
   },
-  windowGoBack: function () {
+  windowGoBack: function() {
     window.history.go(-1);
   },
-  returnTaskType: function (typeValue) {
+  returnTaskType: function(typeValue) {
     typeValue = parseInt(typeValue)
     switch (typeValue) {
       case 0:
@@ -581,7 +353,7 @@ var wpyTools = {
   },
   //二次封装 Layer.msg
   //text 提示的信息, time 提示在多少时间后消失, 消失后执行的回调函数
-  wpyMsg: function (text, time, callback) {
+  wpyMsg: function(text, time, callback) {
     //回调函数是否传入,否则默认是刷新页面
     var callbackFn;
     switch (typeof callback) {
@@ -600,13 +372,13 @@ var wpyTools = {
 
     layer.msg(text, {
       time: time ? time : 2000
-    }, function () {
+    }, function() {
       if (callbackFn == false) {
-        setTimeout(function () {
+        setTimeout(function() {
           return false;
         }, time);
       } else {
-        setTimeout(function () {
+        setTimeout(function() {
           callbackFn();
         }, time);
       }
@@ -614,17 +386,19 @@ var wpyTools = {
   }
 };
 
-//juicer 全局函数注册
+// //juicer 全局函数注册
 
-//空处理
-juicer.register('isNull', wpyTools.isNull);
-//时间转换(x秒 => a天 b时 c分
-juicer.register('timeTransform', wpyTools.secondTimeToDay);
-//半分比加
-juicer.register('percent', wpyTools.numberToPercentStr);
-juicer.register('taskTypeValue', wpyTools.returnTaskType);
-juicer.register('httpUrl', wpyTools.urlAddHttp);
+// //空处理
+// juicer.register('isNull', wpyTools.isNull);
+// //时间转换(x秒 => a天 b时 c分
+// juicer.register('timeTransform', wpyTools.secondTimeToDay);
+// //半分比加
+// juicer.register('percent', wpyTools.numberToPercentStr);
+// juicer.register('taskTypeValue', wpyTools.returnTaskType);
+// juicer.register('httpUrl', wpyTools.urlAddHttp);
 //创建下拉选择框 (选择下拉数据,渲染下拉选择的domId,选择后调用 callback)
+
+
 function initSelect(selectOptions, domId, callback) {
   var selectDom = $('#' + domId);
   var returnValue;
@@ -643,7 +417,7 @@ function initSelect(selectOptions, domId, callback) {
     $('#' + domId).append(selectHtml);
   }
   //展开 收拢 下拉菜单事件绑定
-  selectDom.on("click", ".wpy-select > .select-box", function (e) {
+  selectDom.on("click", ".wpy-select > .select-box", function(e) {
     e.stopPropagation();
     console.log("$(this).parent()", $(this).parent())
     var arrowBtn = $(this).parent().find("i");
@@ -666,7 +440,7 @@ function initSelect(selectOptions, domId, callback) {
         break;
     }
   });
-  selectDom.on("mouseleave", ".wpy-select,.wpy-select > .option-list", function (e) {
+  selectDom.on("mouseleave", ".wpy-select,.wpy-select > .option-list", function(e) {
     e.stopPropagation();
     var arrowBtn = $(this).parent().find("i");
     var optionList = $(this).parent().find(".option-list");
@@ -674,7 +448,7 @@ function initSelect(selectOptions, domId, callback) {
     optionList.hide();
   });
   //点击选择 事件绑定
-  selectDom.on("click", ".wpy-select > .option-list >.select-option", function (e) {
+  selectDom.on("click", ".wpy-select > .option-list >.select-option", function(e) {
     e.stopPropagation();
     var self = this;
     var selectValue = $(self).attr("value");
@@ -697,7 +471,7 @@ function initSearch(domId, callback) {
   var returnSearchKey;
   dom.empty().append('<div class="wpy-input wpy-input-search" style="display: inline-block;"><input type="text" placeholder="请输入标题关键字"><i class="pz-icon icon-search"></i></div>');
   var inputDom = dom.find('input');
-  dom.on("click", "i", function (e) {
+  dom.on("click", "i", function(e) {
     e.stopPropagation();
     returnSearchKey = inputDom.val();
     //调用回调函数,传参选择的 value
@@ -742,7 +516,7 @@ function initInlineSelect(options, domId, callback) {
   //渲染 dom
   dom.empty().append(html);
   //绑定点击事件
-  dom.on("click", "li", function () {
+  dom.on("click", "li", function() {
     dom.find("li").removeClass("select-on");
     $(this).addClass("select-on");
     returnValue = $(this).attr("data-value");
@@ -768,47 +542,47 @@ function initTab(options, domId, callback) {
   var dom = $("#" + domId);
   switch (options.type) {
     case 0:
-    {
-      //横排 tab
-      var hTabHtml = '<ul class="wpy-tab-header horizontal-tab">';
-      var hTabLiHtml = ''; //tab Li元素集
-      if (!!options.tabHeader && options.tabHeader.length > 0) {
-        for (var i = 0; i < options.tabHeader.length; i++) {
-          if (i == options.activeTabIndex) {
-            hTabLiHtml += '<li class="wpy-tab-header-item wpy-tab-on " data-tab-index="' + i + '" data-value="' + options.tabHeader[i].value + '">' + options.tabHeader[i].text + '</li>'
-          } else {
-            hTabLiHtml += '<li class="wpy-tab-header-item" data-tab-index="' + i + '"  data-value="' + options.tabHeader[i].value + '">' + options.tabHeader[i].text + '</li>'
+      {
+        //横排 tab
+        var hTabHtml = '<ul class="wpy-tab-header horizontal-tab">';
+        var hTabLiHtml = ''; //tab Li元素集
+        if (!!options.tabHeader && options.tabHeader.length > 0) {
+          for (var i = 0; i < options.tabHeader.length; i++) {
+            if (i == options.activeTabIndex) {
+              hTabLiHtml += '<li class="wpy-tab-header-item wpy-tab-on " data-tab-index="' + i + '" data-value="' + options.tabHeader[i].value + '">' + options.tabHeader[i].text + '</li>'
+            } else {
+              hTabLiHtml += '<li class="wpy-tab-header-item" data-tab-index="' + i + '"  data-value="' + options.tabHeader[i].value + '">' + options.tabHeader[i].text + '</li>'
+            }
           }
+          hTabHtml += (hTabLiHtml + '</ul>');
         }
-        hTabHtml += (hTabLiHtml + '</ul>');
+        dom.find("ul").empty().append(hTabHtml);
       }
-      dom.find("ul").empty().append(hTabHtml);
-    }
       break;
     case 1:
-    {
-      //竖排 tab
-      var vTabHtml = '<ul class="wpy-tab-header vertical-tab">';
-      var vTabLiHtml = ''; //tab Li元素集
+      {
+        //竖排 tab
+        var vTabHtml = '<ul class="wpy-tab-header vertical-tab">';
+        var vTabLiHtml = ''; //tab Li元素集
 
-      if (!!options.tabHeader && options.tabHeader.length > 0) {
-        for (var i = 0; i < options.tabHeader.length; i++) {
-          if (i === options.activeTabIndex) {
-            vTabLiHtml += '<li class="wpy-tab-header-item wpy-tab-on "  data-tab-index="' + i + '" data-value="' + options.tabHeader[i].value + '">' + options.tabHeader[i].text + '</li>'
-          } else {
-            vTabLiHtml += '<li class="wpy-tab-header-item"  data-tab-index="' + i + '" data-value="' + options.tabHeader[i].value + '">' + options.tabHeader[i].text + '</li>'
+        if (!!options.tabHeader && options.tabHeader.length > 0) {
+          for (var i = 0; i < options.tabHeader.length; i++) {
+            if (i === options.activeTabIndex) {
+              vTabLiHtml += '<li class="wpy-tab-header-item wpy-tab-on "  data-tab-index="' + i + '" data-value="' + options.tabHeader[i].value + '">' + options.tabHeader[i].text + '</li>'
+            } else {
+              vTabLiHtml += '<li class="wpy-tab-header-item"  data-tab-index="' + i + '" data-value="' + options.tabHeader[i].value + '">' + options.tabHeader[i].text + '</li>'
+            }
           }
+          vTabHtml += (vTabLiHtml + '</ul>');
         }
-        vTabHtml += (vTabLiHtml + '</ul>');
+        dom.find("ul").empty().append(vTabHtml);
       }
-      dom.find("ul").empty().append(vTabHtml);
-    }
       break;
     default:
       alert("参数错误");
       return;
   }
-  dom.on("click", "li", function () {
+  dom.on("click", "li", function() {
     var $self = $(this);
     var returnValue = $self.attr("data-value");
     console.log("tabValue", returnValue);
@@ -822,7 +596,7 @@ function initTab(options, domId, callback) {
 // QQ号、手机号、Email、是否是数字、去掉前后空格、是否存在中文、邮编、身份证、URL、日期格式、IP
 var wpyRegExp = {
   // 检查字符串是否为合法QQ号码
-  isQQ: function (str) {
+  isQQ: function(str) {
     // 1 首位不能是0  ^[1-9]
     // 2 必须是 [5, 11] 位的数字  \d{4, 9}
     var reg = /^[1-9][0-9]{4,9}$/gim;
@@ -835,7 +609,7 @@ var wpyRegExp = {
     }
   },
   // 检查字符串是否为合法手机号码
-  isPhone: function (str) {
+  isPhone: function(str) {
     var reg = /^(0|86|17951)?(13[0-9]|15[012356789]|18[0-9]|14[57]|17[678])[0-9]{8}$/;
     if (reg.test(str)) {
       console.log('手机号码格式输入正确');
@@ -846,7 +620,7 @@ var wpyRegExp = {
     }
   },
   // 检查字符串是否为合法Email地址
-  isEmail: function (str) {
+  isEmail: function(str) {
     var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
     // var reg = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
     if (reg.test(str)) {
@@ -858,7 +632,7 @@ var wpyRegExp = {
     }
   },
   // 检查字符串是否是数字
-  isNumber: function (str) {
+  isNumber: function(str) {
     var reg = /^\d+$/;
     if (reg.test(str)) {
       console.log(str + '是数字');
@@ -869,12 +643,12 @@ var wpyRegExp = {
     }
   },
   // 去掉前后空格
-  trim: function (str) {
+  trim: function(str) {
     var reg = /^\s+|\s+$/g;
     return str.replace(reg, '');
   },
   // 检查字符串是否存在中文
-  isChinese: function (str) {
+  isChinese: function(str) {
     var reg = /[\u4e00-\u9fa5]/gm;
     if (reg.test(str)) {
       console.log(str + ' 中存在中文');
@@ -885,7 +659,7 @@ var wpyRegExp = {
     }
   },
   // 检查字符串是否为合法邮政编码
-  isPostcode: function (str) {
+  isPostcode: function(str) {
     // 起始数字不能为0，然后是5个数字  [1-9]\d{5}
     var reg = /^[1-9]\d{5}$/g;
     // var reg = /^[1-9]\d{5}(?!\d)$/;
@@ -898,7 +672,7 @@ var wpyRegExp = {
     }
   },
   // 检查字符串是否为合法身份证号码
-  isIDcard: function (str) {
+  isIDcard: function(str) {
     var reg = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
     if (reg.test(str)) {
       console.log(str + ' 是合法的身份证号码');
@@ -909,7 +683,7 @@ var wpyRegExp = {
     }
   },
   // 检查字符串是否为合法URL
-  isURL: function (str) {
+  isURL: function(str) {
     var reg = /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i;
     if (reg.test(str)) {
       console.log(str + ' 是合法的URL');
@@ -920,7 +694,7 @@ var wpyRegExp = {
     }
   },
   // 检查字符串是否为合法日期格式 yyyy-mm-dd
-  isDate: function (str) {
+  isDate: function(str) {
     var reg = /^[1-2][0-9][0-9][0-9]-[0-1]{0,1}[0-9]-[0-3]{0,1}[0-9]$/;
     if (reg.test(str)) {
       console.log(str + ' 是合法的日期格式');
@@ -931,7 +705,7 @@ var wpyRegExp = {
     }
   },
   // 检查字符串是否为合法IP地址
-  isIP: function (str) {
+  isIP: function(str) {
     // 1.1.1.1  四段  [0 , 255]
     // 第一段不能为0
     // 每个段不能以0开头
@@ -952,4 +726,3 @@ var wpyRegExp = {
 /*
  *   time:[number]表示无操作的持续时间,//默认单位(分钟)
  */
-
