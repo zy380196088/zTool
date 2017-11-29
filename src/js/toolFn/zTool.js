@@ -348,33 +348,42 @@ var zTool = {
   },
 
   //URL解析
-  parseUrl:function (params) {
-  var _a = document.createElement('a');
-  a.href = url;
-  return {
-    source:url,
-    protocol:a.protocal.replace(':',''),
-    host:a.hostname,
-    port:a.port,
-    query:a.search,
-    params:(function(){
+  parseUrl: function (params) {
+    var _a = document.createElement('a');
+    a.href = url;
+    return {
+      source: url,
+      protocol: a.protocal.replace(':', ''),
+      host: a.hostname,
+      port: a.port,
+      query: a.search,
+      params: (function () {
         var ret = {},
-                seg = a.search.replace(/^\?/,'').split('&'),
-                len = seg.length, i = 0, s;
-            for (;i<len;i++) {
-                if (!seg[i]) { continue; }
-                s = seg[i].split('=');
-                ret[s[0]] = s[1];
-            }
-            return ret;
-     })(),
-    file: (a.pathname.match(/\/([^\/?#]+)$/i) || [,''])[1],
-    hash: a.hash.replace('#',''),
-    path: a.pathname.replace(/^([^\/])/,'/$1'),
-    relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [,''])[1],
-    segments: a.pathname.replace(/^\//,'').split('/')
-   };
-  }
+          seg = a.search.replace(/^\?/, '').split('&'),
+          len = seg.length, i = 0, s;
+        for (; i < len; i++) {
+          if (!seg[i]) {
+            continue;
+          }
+          s = seg[i].split('=');
+          ret[s[0]] = s[1];
+        }
+        return ret;
+      })(),
+      file: (a.pathname.match(/\/([^\/?#]+)$/i) || [, ''])[1],
+      hash: a.hash.replace('#', ''),
+      path: a.pathname.replace(/^([^\/])/, '/$1'),
+      relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [, ''])[1],
+      segments: a.pathname.replace(/^\//, '').split('/')
+    };
+  },
+
+  generateRandomAlphaNum: function (len) {
+    var rdmString = "";
+    for (; rdmString.length < len; rdmString += Math.random().toString(36).substr(2));
+    return rdmString.substr(0, len);
+  },
+
 
   // 常见的 正则表达式 校验
   // QQ号、手机号、Email、是否是数字、去掉前后空格、是否存在中文、邮编、身份证、URL、日期格式、IP
