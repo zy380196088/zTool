@@ -347,6 +347,35 @@ var zTool = {
     },
   },
 
+  //URL解析
+  parseUrl:function (params) {
+  var _a = document.createElement('a');
+  a.href = url;
+  return {
+    source:url,
+    protocol:a.protocal.replace(':',''),
+    host:a.hostname,
+    port:a.port,
+    query:a.search,
+    params:(function(){
+        var ret = {},
+                seg = a.search.replace(/^\?/,'').split('&'),
+                len = seg.length, i = 0, s;
+            for (;i<len;i++) {
+                if (!seg[i]) { continue; }
+                s = seg[i].split('=');
+                ret[s[0]] = s[1];
+            }
+            return ret;
+     })(),
+    file: (a.pathname.match(/\/([^\/?#]+)$/i) || [,''])[1],
+    hash: a.hash.replace('#',''),
+    path: a.pathname.replace(/^([^\/])/,'/$1'),
+    relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [,''])[1],
+    segments: a.pathname.replace(/^\//,'').split('/')
+   };
+  }
+
   // 常见的 正则表达式 校验
   // QQ号、手机号、Email、是否是数字、去掉前后空格、是否存在中文、邮编、身份证、URL、日期格式、IP
   wpyRegExp: {
@@ -477,41 +506,3 @@ var zTool = {
     }
   }
 };
-$.fn.serializeObject = function (data) {
-  var serializeObj = {}; //目标对象
-  var tempObj = {}; //临时对象
-  var array = this.serializeArray(); //转换成数组格式
-  if (data != null && data != undefined) {
-    $.each(data, function (name, value) {
-      array.push({"name": name, "value": value});
-    });
-  }
-  console.log(data);
-  console.log(array);
-  $(array).each(function () {
-    //遍历数组的没个元素
-    if (serializeObj[this.name]) {
-      //判断对象中是否已经存在该属性
-      if ($.isArray(serializeObj[this.name])) {
-        serializeObj[this.name].push(this.value); //如果已存在该字段,追加新值
-      } else {
-        serializeObj[this.name] = [serializeObj[this.name], this.value];
-      }
-    } else {
-      //如果元素 name 不存在,添加属性 name:value
-      serializeObj[this.name] = this.value;
-    }
-  });
-  for (var item in serializeObj) {
-    if ($.isArray(serializeObj[item])) {
-      serializeObj[item] = JSON.stringify(serializeObj[item]);
-    }
-    // else if (item == "group_ids") {
-    //   var tempArry = [];
-    //   tempArry.push(serializeObj[item]);
-    //   serializeObj[item] = JSON.stringify(tempArry);
-    // }
-  }
-  return serializeObj;
-};
-
