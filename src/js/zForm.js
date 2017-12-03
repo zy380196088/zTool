@@ -25,13 +25,13 @@ var Form = {
 
 
 //定义验证方法,添加验证规则
-var Validator = function (argument) {
+var Validator = function(argument) {
   //将验证方法绑定到 Validator 上
 };
 
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
   Validator.prototype = {};
-  $.fn.Validator = function (option) {
+  $.fn.Validator = function(option) {
     var $self = this;
     this.default = {}; //默认配置
     this.messages = {
@@ -48,7 +48,7 @@ var Validator = function (argument) {
     this.options = $.extend({}, this.default, option); //扩展自定义配置
   };
 
-  $.fn.Form = function (options) {
+  $.fn.Form = function(options) {
 
   }
 })(jQuery, window, document);
