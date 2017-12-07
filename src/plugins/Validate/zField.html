@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <title>飞鸽舆信互动管理平台--首页</title>
+  <script src="//static.xinhuaapp.com/js/jquery-1.11.0-min.js"></script>
+  <script src="//static.xinhuaapp.com/js/juicer-min.js"></script>
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/zField.js"></script>
+  <link rel="stylesheet" href="/static/css/ui.css">
+  <style>
+    .tip-box {
+      display: inline-block;
+      width: 200px;
+      height: 20px;
+      border: 1px solid #ccc;
+    }
+
+    .suc {
+      background-color: #5FBDAB;
+    }
+
+    .error {
+      background-color: #F15949;
+    }
+  </style>
+</head>
+
+<body>
+
+
+<div class="form-field wpy-form" style="width: 500px;height: auto;">
+  <form action=""></form>
+  <div class="data-field wpy-input">
+      <input type="text" id="f1" name="f1" class="wpy-input"/>
+      <span></span>
+    </div>
+</div>
+<input type="button" id="bt" value="提交"/>
+
+<script type="text/javascript">
+
+  $(function () {
+    var form;
+    var v_int = /^[0-9]*$/;
+    var uf = new UserForm([new Field({
+      fid: "f1",
+      val: [new Len_val(1, 5, "长度错误"), new Exp_val(v_int, "不是数字")],
+      successFn: function (text) {
+        var self = this;
+        console.log(this, this.field_id, $('#' + self.field_id));
+
+        var _resultDom = $('#' + self.field_id).parent().append('<span class="tip-box"></span>');
+        _resultDom.text("ok")
+        $('#t1').removeClass("error").addClass("suc");
+      },
+      errorFn: function (text) {
+        $('#t1').text(text);
+        $('#t1').removeClass("suc").addClass("error");
+      }
+    })]);
+    uf.set_submit(
+      "bt",
+      function (form) {
+        console.log("表单已经提交了");
+      }
+    );
+  });
+</script>
+</body>
+
+</html>
