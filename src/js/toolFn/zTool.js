@@ -570,3 +570,19 @@ var zTool = {
         }
     }
 };
+
+
+zTool.browser.isMobile = function() {
+    if (zTool.browser.versions.mobile || zTool.browser.versions.android || zTool.browser.versions.ios) {
+        return true
+    } else {
+        return false
+    }
+}();
+zTool.browser.isPc = function() {
+    if (zTool.browser.versions.mobile || zTool.browser.versions.android || zTool.browser.versions.ios) {
+        return false
+    } else {
+        return true
+    }
+}();
