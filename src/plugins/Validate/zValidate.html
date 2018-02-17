@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script type="text/javascript" src="../../lib/jquery-3.1.0.js"></script>
+  <link rel="stylesheet" href="../../lib/bootstrap/bootstrap.css">
+  <title>表单校验框架</title>
+  <style>
+    html,body{
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: antiquewhite;
+    }
+    .form-box{
+      padding: 20px;
+      width: 400px;
+      height: auto;
+      background-color:#eee;
+      position: absolute;
+      margin:auto;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container form-box">
+  <form class="form-horizontal zValidate">
+      <div class="control-group">
+          <label class="control-label" for="inputEmail">Email</label>
+          <div class="controls">
+            <input type="text" id="inputEmail" placeholder="Email"
+            data-zv-require="true"
+            data-zv-require-error="*邮箱必须填写"
+            data-zv-email="true"
+            data-zv-email-error="* 不合法的邮箱地址"
+            >
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputPassword">Password</label>
+          <div class="controls">
+            <input type="password" id="inputPassword" placeholder="Password"
+            data-zv-require = "true"
+            data-zv-require-error = "*密码必须填写"
+            data-zv-length = "8"
+            data-zv-length-error = "*密码必须为8位"
+            data-zv-regex="^\w+$"
+            data-zv-regex-error = "* 密码必须有字母数字下划线所组成"
+            >
+          </div>
+        </div>
+      
+      <div class="control-group warning">
+          <label class="control-label" for="inputWarning">Input with warning</label>
+          <div class="controls">
+            <input type="text" id="inputWarning">
+            <span class="help-inline">Something may have gone wrong</span>
+          </div>
+        </div>
+         
+        <div class="control-group error">
+          <label class="control-label" for="inputError">Input with error</label>
+          <div class="controls">
+            <input type="text" id="inputError">
+            <span class="help-inline">Please correct the error</span>
+          </div>
+        </div>
+         
+        <div class="control-group info">
+          <label class="control-label" for="inputInfo">Input with info</label>
+          <div class="controls">
+            <input type="text" id="inputInfo">
+            <span class="help-inline">Username is already taken</span>
+          </div>
+        </div>
+         
+        <div class="control-group success">
+          <label class="control-label" for="inputSuccess">Input with success</label>
+          <div class="controls">
+            <input type="text" id="inputSuccess">
+            <span class="help-inline">Woohoo!</span>
+          </div>
+        </div>
+  </form>
+</div>
+  <script src="../../lib/bootstrap/bootstrap.min.js"></script>
+  <script src="zValidate.js"></script>
+</body>
+</html>
