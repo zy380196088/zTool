@@ -46,6 +46,7 @@
         var errorMsg  = $field.data("zv-"+rule+"-error") || _this.errorMsg;
         if(val){
           if(result = action.call($field,val)){
+            alert(result)
             $group.addClass("success")
           }else{
             $group.addClass("error")
