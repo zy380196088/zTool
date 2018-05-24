@@ -362,6 +362,33 @@ var wpyTools = {
     }
     return t.split('').reverse().join('') + '.' + r;
   },//加千分分隔逗号
+  minusArr: function (thisArr, targetIdArr, key) {
+    // console.log(thisArr, targetIdArr, key);
+    var resArr = [];
+    if (!!thisArr && thisArr.length > 0) {
+      $.each(thisArr, function () {
+        if ($.inArray(this[key], targetIdArr) == -1) {
+          // console.log(targetIdArr, $.inArray(this[key], targetIdArr), this, this[key]);
+          resArr.push(this);
+        }
+      })
+    }
+    // console.log(resArr);
+    return resArr;
+  },//过滤对象数组
+  filterCommon: function (arr, key) {//对象数组,根据对象属性key的值去重
+    var hash = {};
+    arr = arr.reduce(function (item, next) {
+      hash[next[key]] ? '' : hash[next[key]] = true && item.push(next);
+      return item;
+    }, []);
+    return arr;
+  },//对象数组去重
+  flatten :function(arr){
+    return arr.reduce(function(prev, next){
+      return prev.concat(Array.isArray(next) ? flatten(next) : next)
+    }, [])
+  },//数组扁平化:将一个嵌套多层的数组 array (嵌套可以是任何层数)转换为只有一层的数组;
   //二次封装 Layer.msg
   //text 提示的信息, time 提示在多少时间后消失, 消失后执行的回调函数
   wpyMsg: function(text, time, callback) {
