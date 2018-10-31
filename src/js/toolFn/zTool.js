@@ -1,8 +1,8 @@
 /*
  * @Author: zhouyu
  * @Date:   2017-08-06 00:32:14
- * @Last Modified by:   zhouyu
- * @Last Modified time: 2017-08-07 11:58:46
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2018-10-31 23:52:07
  */
 
 'use strict';
@@ -132,6 +132,9 @@ var zTool = {
             return data;
         }
     },
+    isNumber:function (value) {
+        return typeof value === 'number' && isFinite(value);
+      },
     encrypt: {
         //密码 md5加密
         md5: function(string) {
